@@ -6,38 +6,32 @@
 	<link rel="stylesheet" href="/css/normalize.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,800' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="/css/headline-style.css">
 	<link rel="stylesheet" href="/css/style.css?v=2">
+	<script src="/js/modernizr.js"></script> 
 </head>
 <body>
-	<div class="header">Hi I'm Shane!</div>
+	<div class="header">
+	
+	<section class="cd-intro">
+		<h1 class="cd-headline letters type">
+			<span>My favourite food is</span> 
+			<span class="cd-words-wrapper waiting">
+				<b class="is-visible">pizza</b>
+				<b>sushi</b>
+				<b>steak</b>
+			</span>
+		</h1>
+	</section>
+
+	</div>
 	<div class="content">
 		<p> Hello there.</p>
 
 	</div>
 	
-	<script>
-		// https://github.com/Modernizr/Modernizr/issues/572
-		// Similar to http://jsfiddle.net/FWeinb/etnYC/
-		Modernizr.addTest('cssvhunit', function() {
-	    var bool;
-	    Modernizr.testStyles("#modernizr { height: 50vh; }", function(elem, rule) {   
-	        var height = parseInt(window.innerHeight/2,10),
-	            compStyle = parseInt((window.getComputedStyle ?
-	                      getComputedStyle(elem, null) :
-	                      elem.currentStyle)["height"],10);
 
-	        bool= !!(compStyle == height);
-	    });
-	    return bool;
-		});
-		$(function() {
-    	if (!Modernizr.cssvhunit) {
-        	var windowH = $(window).height();
-        	$('body').css({'background-size':100+'%,'+($(window).height())+'px'});
-        	$('header').css({'height':($(window).height())+'px'});
-    	}
-		});
-	</script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>	
+	<script src="/js/headline-main.js"></script>
 </body>
 </html>
