@@ -1258,3 +1258,10 @@ xpush
     transform: translateX(100%);
   }
 }
+/* -------------My styles------------------- */
+.is-visible {
+  color: maroon;
+}
+
+
+
