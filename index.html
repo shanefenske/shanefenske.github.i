@@ -39,5 +39,15 @@
 	<script>
 	$( "b:contains('Yale')" ).css( "color", "#00336C" );
 	</script>
+	<script>
+	var divs = $('section.cd-into');
+$(window).scroll(function(){
+   if($(window).scrollTop()<10){
+         divs.stop(true,true).fadeIn("slow");
+   } else {
+         divs.stop(true,true).fadeOut("slow");
+   }
+});
+	</script>
 </body>
 </html>
