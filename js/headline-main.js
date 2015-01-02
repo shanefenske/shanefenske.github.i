@@ -19,7 +19,7 @@ jQuery(document).ready(function($){
 
 	function initHeadline() {
 		//insert <i> element for each letter of a changing word
-		singleLetters($('.cd-headline.letters').find('span'));
+		singleLetters($('.cd-headline.letters').find('b'));
 		//initialise headline animation
 		animateHeadline($('.cd-headline'));
 	}
