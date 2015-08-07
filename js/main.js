@@ -15,6 +15,10 @@
 	$slide = $('.homeSlide');
 	$body = $('body');
 	
+
+$(document).ready(function () {
+    if(!(window.location.href.indexOf("slide-2") > -1)) {
+       
     //FadeIn all sections   
 	$body.imagesLoaded( function() {
 		setTimeout(function() {
@@ -25,9 +29,14 @@
 		      // Fade in sections
 			  $body.removeClass('loading').addClass('loaded');
 			  
-		}, 800);
+		}, 100);
 	});
 	
+	    }
+	else {adjustWindow();
+		$body.removeClass('loading').addClass('loaded');}
+});
+
 	function adjustWindow(){
 		
 

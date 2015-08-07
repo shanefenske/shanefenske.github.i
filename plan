@@ -4,6 +4,26 @@ sticky header: Shane Fenske| Yale ’17 | Computer Science      awesome font lin
 non-sticky sorting bar
 favicon: stock minnesota outline   bootstrap the whole thing
 
+experience 1
+projects 2
+travel 3
+nba 4
+
+
+-DAI-internship 1
+-hack-mit 2
+-hooping habit 2
+-budapest 3
+-prague 3
+-italy 3
+-travel distance  4 2
+-stats internship 4
+
+
+
+
+
+
 place to display 2x4: isotope sorting
 http://www.bemidjisculpture.org/   (business catalyst)
 http://www.aliceblessing.com/
@@ -11,7 +31,7 @@ http://www.ncsmn.com/
 http://www.blackduckmn.com/business
 photos (lightbox) (putup cali trip)
 nba 
-hack@brown
+hackmit
 hoopinghabit.com
 
 
@@ -23,4 +43,8 @@ TODO:
 	make responsive
 
 final touches: speed up typing
+
+TODO: 
+bigger font on mobile
+sticky header doesnt work on mobile
 
