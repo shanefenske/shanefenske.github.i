@@ -56,17 +56,10 @@ main {
 .hsContent {
 	/*max-width: 700px;*/
 	position: absolute;
-	left: 1%;
+/*	left: 1%;*/
 	top: 23%;
 }
-	.hsContent h2  {
-		color: #fff8de;
-		background-color: rgba(0,0,0,0.5);
-		padding: 10px 5px;
-		font-size: 35px;
-		line-height: 38px;
-		margin-bottom: 12px;
-	}
+
 	.hsContent p {
 		width: 400px;
 		color: #b2b2b2;
@@ -106,6 +99,7 @@ main {
 #slide-2 .hsContent {
 	/*bottom: 200px;*/
 	top: auto;
+	padding: 0;
 }
 
 .active {
@@ -116,6 +110,19 @@ main {
     -o-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
+}
+
+.nav {
+	padding: 0;
+}
+
+.top-bar {
+	background-color: #13275A;
+	padding: 15px;
+	color: white;
+	font-style: bold;
+	font-size: 1.7em;
+
 }
 
 
