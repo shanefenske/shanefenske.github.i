@@ -314,13 +314,14 @@ xtype
   animation: cd-pulse 1s infinite;
 }
 .cd-headline.type .cd-words-wrapper.selected {
-  background-color: #aebcb9;
+  /*background-color: #aebcb9;*/
+  background-color:  rgba(72, 78, 92,50);
 }
 .cd-headline.type .cd-words-wrapper.selected::after {
   visibility: hidden;
 }
 .cd-headline.type .cd-words-wrapper.selected b {
-  color: #0d0d0d;
+  color: rgb(226,226,226);
 }
 .cd-headline.type b {
   visibility: hidden;
@@ -1260,7 +1261,8 @@ xpush
 }
 /* -------------My styles------------------- */
 .is-visible {
-  color: maroon;
+  /*color: maroon;*/
+  color: #1B367E;
 }
 
 
