@@ -4,7 +4,7 @@ body, html {
 	/*background-color: #000000;*/
 }
 body {
-	
+	font-family: 'Enriqueta', serif;
 }
 .no-js {
 	padding-top: 106px;
@@ -122,13 +122,13 @@ main {
 	padding: 15px;
 	color: white;
 	font-style: bold;
-	font-size: 1.7em;
+	font-size: 1.5em;
 
 }
 
 .top-bar a {
 	color: white;
-	padding: 0 .25em;
+	padding-right: .5em;
 }
 
 .top-bar a:hover {
@@ -139,7 +139,6 @@ main {
 .top-bar p {
 	display: inline-block;
     margin: 0;
-    padding-left: .5em;
 }
 
 
@@ -155,8 +154,16 @@ main {
 	text-align: right;
 }
 
-body {
-	font-family: 'Enriqueta', serif;
-}
+
+
+/* Large Devices, Wide Screens */
+    @media only screen and (max-width : 768px) {
+
+		.left-top {
+			text-align: center;	
+		}
+
+    }
+
 
 
