@@ -1,13 +1,7 @@
-$(document).ready(function() {
-
-    
-    $('#vid').on('click', function () {
-        $.featherlight({iframe: 'http://stats.nba.com/cvp.html?GameID=0021500550&GameEventID=14#',  iframeWidth: 850,
-        iframeHeight: 360});
-          
-    });
-
+$(document).ready(function() {   
+    var data;
     var players;
+    var color = ['red','green']
     var teams = {
         'Atlanta Hawks': 1610612737,
         'Boston Celtics': 1610612738,
@@ -67,23 +61,102 @@ $(document).ready(function() {
             }
         });
     }
+
     $( '#teams').change(function() {
         loadPlayers();
     }); 
 
     (function ($) {
-        $('button').on('click', function () {
-            // remove d3
-
-            // add spinner to indicate something is happening
-            // $('<i class="fa fa-refresh fa-spin"/>').appendTo('body');
+        $('button').on('click', function () {        
             var index = $("#players")[0].selectedIndex;
             var player = players[index];
             var id = player[12];
             console.log(id)
               
-        });
-    }(jQuery));
 
+
+            var shotURL = 'http://stats.nba.com/stats/shotchartdetail?CFID=33&CFPAR' +
+                            'AMS=2014-15&ContextFilter=&ContextMeasure=FGA&DateFrom=&D' +
+                            'ateTo=&GameID=&GameSegment=&LastNGames=0&LeagueID=00&Loca' +
+                            'tion=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&' +
+                            'PaceAdjust=N&PerMode=PerGame&Period=0&PlayerID='+id+'&Plu' +
+                            'sMinus=N&Position=&Rank=N&RookieYear=&Season=2014-15&Seas' +
+                            'onSegment=&SeasonType=Regular+Season&TeamID=0&VsConferenc' +
+                            'e=&VsDivision=&mode=Advanced&showDetails=0&showShots=1&sh' +
+                            'owZones=0'
+            $.ajax({
+                url: shotURL,
+                jsonp: "callback",
+                dataType: "jsonp",
+                success: function( response ) {
+                  console.log(response['resultSets'][0]['rowSet']); // ['rowSet']
+                  data = response['resultSets'][0]['rowSet'];
+                  console.log(data); 
+                  refreshGraph();
+                }
+            });                
+
+        });
+    }(jQuery)); 
+                   
+    var x = d3.time.scale()
+      .range([10, 280])
+    var y = d3.scale.linear()
+      .range([180, 10])
+    
+
+
+    var max = { x: 600, y: 550};
+    var svg = d3.select("#chart").append("svg:svg")
+      .attr("width", max.x)
+      .attr("height", max.y)
+
+
+    var courtUrl = "court.jpg";
+    svg.append("defs")
+        .append("pattern")
+        .attr("id", "bg")
+        .attr('patternUnits', 'userSpaceOnUse')
+        .attr("width", max.x)
+        .attr("height", max.y)
+        .append("image")
+        .attr("xlink:href", courtUrl)
+        .attr("width", max.x)
+        .attr("height", max.y);
+
+    svg.append("rect")
+        .attr("x", "0")
+        .attr("y", "0")
+        .attr("width", max.x)
+        .attr("height", max.y)
+        .attr("fill", "url(#bg)");
+
+    var refreshGraph = function() {
+    d3.selectAll('circle').remove();
+      var circles = svg.selectAll("circle").data(data)
+      circles.enter()
+      .append("svg:circle")
+      .attr("r", 4)
+      .attr("cx", function(d) { return d[17] })
+      .attr("cy", function(d) { return d[18] })
+      .style("fill", function(d) { return color[d[20]];})
+      .on("click", function(d) {
+                d3.select("#shotinfo").text("Shooter: " + d[4] + "\nShot Type: " + d[11] + 
+                     "\nQuarter: " + d[7] + " Time: " + d[8] + ":" + d[9] +
+                      "\nShot Distance: " + d[16] + " feet\nShot Made:" + d[20])
+                $("#vid").remove();
+                $("#sideInfo").append("<a href=\"#\" id=\"vid\">View Shot</a>");
+
+                $('#vid').on('click', function () {
+                    $.featherlight({iframe: 'http://stats.nba.com/cvp.html?GameID='+ d[1] + '&GameEventID=' + d[2] + '#',  iframeWidth: 850,
+                    iframeHeight: 360});          
+    }); 
+      })
+
+      circles.exit()
+      .remove()
+    }
+
+    // refreshGraph()
 
 });
