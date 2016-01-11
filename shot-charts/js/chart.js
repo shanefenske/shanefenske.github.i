@@ -28,16 +28,37 @@ $.ajax({
       console.log(response['resultSets'][0]['rowSet']);
     }
 });
+    var max = { x: 600, y: 550};
 
    var data = JSONData.slice()
    var x = d3.time.scale()
     .range([10, 280])
-
   var y = d3.scale.linear()
     .range([180, 10])
   var svg = d3.select("#chart").append("svg:svg")
-   .attr("width", 300)
-   .attr("height", 200)
+   .attr("width", max.x)
+   .attr("height", max.y)
+
+
+var courtUrl = "court.jpg";
+svg.append("defs")
+    .append("pattern")
+    .attr("id", "bg")
+    .attr('patternUnits', 'userSpaceOnUse')
+    .attr("width", max.x)
+    .attr("height", max.y)
+    .append("image")
+    .attr("xlink:href", courtUrl)
+    .attr("width", max.x)
+    .attr("height", max.y);
+
+svg.append("rect")
+    .attr("x", "0")
+    .attr("y", "0")
+    .attr("width", max.x)
+    .attr("height", max.y)
+    .attr("fill", "url(#bg)");
+
   var start = d3.min(data, dateFn)
   var end = d3.max(data, dateFn)
 

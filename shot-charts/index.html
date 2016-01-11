@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css" />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
-
+    <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body >
@@ -27,7 +27,7 @@
 </nav>
 <div class="container-fluid" id="main">
     <div class="row row-offcanvas row-offcanvas-left">
-        <div class="col-md-3 col-lg-2 sidebar-offcanvas" id="sidebar" role="navigation">      
+        <div class="col-md-3 col-lg-2 sidebar-offcanvas" id="sidebar" role="navigation"> 
             <select id="teams">
                 <option>Atlanta Hawks</option>
                 <option>Boston Celtics</option>
@@ -67,11 +67,13 @@
             <button>Generate Chart</button>
         </div>
         <!--/col-->
-
-        <div class="col-md-9 col-lg-10 main">
+      
+        <div class="col-md-6 col-lg-8 main">
             <div id="chart"> 
+<!--             <iframe style="width: 600px; height: 400px;"
+                src="http://stats.nba.com/cvp.html?GameID=0021500550&GameEventID=14#"></iframe>  -->
             </div>      
-                <div class="table-responsive">
+<!--                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead class="thead-inverse">
                             <tr>
@@ -92,14 +94,19 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-            </div>
-         
-
+                </div> -->
         </div>
-        <!--/main col-->
-    </div>
+        <div class="col-md-3 col-lg-2"> </div>
 
+    </div>
+</div>
+<!-- <a href="#" data-featherlight="#mylightbox">Open element in lightbox</a>
+<div id="mylightbox">
+    <iframe style="width: 600px; height: 400px;"
+                src="http://stats.nba.com/cvp.html?GameID=0021500550&GameEventID=14#"></iframe>
+
+</div> -->
+<a href="#" id="vid">Watch shot</a>
 </div>
 <!--/.container-->
 <footer class="container-fluid">
@@ -115,5 +122,6 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>  
     <script src="js/scripts.js"></script>
     <script src="js/chart.js"></script>
+    <script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
   </body>
 </html>

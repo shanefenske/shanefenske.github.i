@@ -1,4 +1,12 @@
 $(document).ready(function() {
+
+    
+    $('#vid').on('click', function () {
+        $.featherlight({iframe: 'http://stats.nba.com/cvp.html?GameID=0021500550&GameEventID=14#',  iframeWidth: 850,
+        iframeHeight: 360});
+          
+    });
+
     var players;
     var teams = {
         'Atlanta Hawks': 1610612737,
