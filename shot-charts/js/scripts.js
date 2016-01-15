@@ -1,7 +1,11 @@
 $(document).ready(function() {   
     var data;
     var players;
-    var color = ['red','green']
+    var index;
+    var player;
+    var id;
+    var shotURL;
+    var color = ['#FF4136','#2ECC40']
     var teams = {
         'Atlanta Hawks': 1610612737,
         'Boston Celtics': 1610612738,
@@ -35,17 +39,19 @@ $(document).ready(function() {
         'Washington Wizards': 1610612764
     };
 
-    loadPlayers();
+    loadPlayers(true);
+
+
 
     $('[data-toggle=offcanvas]').click(function() {
-    $('.row-offcanvas').toggleClass('active');
+        $('.row-offcanvas').toggleClass('active');
     });
 
-    function loadPlayers() {
+    function loadPlayers(first) {
         var team = teams[$('#teams option:selected').text()];
-            
+
         $.ajax({
-            url: 'http://stats.nba.com/stats/commonteamroster?&Season=2014-15&TeamID=' + team,
+            url: 'http://stats.nba.com/stats/commonteamroster?&Season=2015-16&TeamID=' + team,
             jsonp: "callback",
             dataType: "jsonp",
 
@@ -56,107 +62,163 @@ $(document).ready(function() {
                 $('#players').empty();
                 for (index = 0, len = players.length; index < len; ++index) {
                     // console.log(players[index]);
-                    $('#players').append('<option value="foo">'+players[index][3]+'</option>');
+                    $('#players').append('<option value='+ index + '>'+players[index][3]+'</option>');
+                }
+
+                if(first) {
+                    //select joe johnson
+                    $("#players").val(3);
+                    player = players[3];
+                    id = 2207;
+                    shotURL = 'http://stats.nba.com/stats/shotchartdetail?CFID=33&CFPAR' +
+                    'AMS=2015-16&ContextFilter=&ContextMeasure=FGA&DateFrom=&D' +
+                    'ateTo=&GameID=&GameSegment=&LastNGames=0&LeagueID=00&Loca' +
+                    'tion=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&' +
+                    'PaceAdjust=N&PerMode=PerGame&Period=0&PlayerID='+id+'&Plu' +
+                    'sMinus=N&Position=&Rank=N&RookieYear=&Season=2015-16&Seas' +
+                    'onSegment=&SeasonType=Regular+Season&TeamID=0&VsConferenc' +
+                    'e=&VsDivision=&mode=Advanced&showDetails=0&showShots=1&sh' +
+                    'owZones=0';
+                    $("#sideInfo").append("<img id=\"headPic\" src=\"http://stats.nba.com/media/players/230x185/" + id + ".png \" >");
+                    $("#sideInfo").append("<p id=\"basicInfo\">" + player[3] + "<br/>#" + player[4] + " | " +  player[5] + 
+                       " | "  + player[6] + " | " + player[7] + "lbs" + " | " +
+                       player[11] + "<br/>" + "Born: " + player[8] + " (" + player[9] + " years old)<br/>" + 
+                       "Experience: " + player[10] + " years </p>");
+                    refreshGraph();
                 }
             }
         });
-    }
+}
 
-    $( '#teams').change(function() {
-        loadPlayers();
-    }); 
+$( '#teams').change(function() {
+    loadPlayers();
+}); 
 
-    (function ($) {
-        $('button').on('click', function () {        
-            var index = $("#players")[0].selectedIndex;
-            var player = players[index];
-            var id = player[12];
-            console.log(id)
-              
-
-
-            var shotURL = 'http://stats.nba.com/stats/shotchartdetail?CFID=33&CFPAR' +
-                            'AMS=2014-15&ContextFilter=&ContextMeasure=FGA&DateFrom=&D' +
-                            'ateTo=&GameID=&GameSegment=&LastNGames=0&LeagueID=00&Loca' +
-                            'tion=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&' +
-                            'PaceAdjust=N&PerMode=PerGame&Period=0&PlayerID='+id+'&Plu' +
-                            'sMinus=N&Position=&Rank=N&RookieYear=&Season=2014-15&Seas' +
-                            'onSegment=&SeasonType=Regular+Season&TeamID=0&VsConferenc' +
-                            'e=&VsDivision=&mode=Advanced&showDetails=0&showShots=1&sh' +
-                            'owZones=0'
-            $.ajax({
-                url: shotURL,
-                jsonp: "callback",
-                dataType: "jsonp",
-                success: function( response ) {
-                  console.log(response['resultSets'][0]['rowSet']); // ['rowSet']
-                  data = response['resultSets'][0]['rowSet'];
-                  console.log(data); 
-                  refreshGraph();
-                }
-            });                
-
-        });
-    }(jQuery)); 
-                   
-    var x = d3.time.scale()
-      .range([10, 280])
-    var y = d3.scale.linear()
-      .range([180, 10])
-    
+(function ($) {
+    $('button').on('click', function () {  
+        $(".tooltip").remove();   
+        index = $("#players")[0].selectedIndex;
+        player = players[index];
+        id = player[12];
+        shotURL = 'http://stats.nba.com/stats/shotchartdetail?CFID=33&CFPAR' +
+        'AMS=2015-16&ContextFilter=&ContextMeasure=FGA&DateFrom=&D' +
+        'ateTo=&GameID=&GameSegment=&LastNGames=0&LeagueID=00&Loca' +
+        'tion=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&' +
+        'PaceAdjust=N&PerMode=PerGame&Period=0&PlayerID='+id+'&Plu' +
+        'sMinus=N&Position=&Rank=N&RookieYear=&Season=2015-16&Seas' +
+        'onSegment=&SeasonType=Regular+Season&TeamID=0&VsConferenc' +
+        'e=&VsDivision=&mode=Advanced&showDetails=0&showShots=1&sh' +
+        'owZones=0';
 
 
-    var max = { x: 600, y: 550};
-    var svg = d3.select("#chart").append("svg:svg")
-      .attr("width", max.x)
-      .attr("height", max.y)
+        $("#headPic").remove();
+        $("#basicInfo").remove();
+        $("#sideInfo").append("<img id=\"headPic\" src=\"http://stats.nba.com/media/players/230x185/" + id + ".png \" >");
+        $("#sideInfo").append("<p id=\"basicInfo\">" + player[3] + "<br/>#" + player[4] + " | " +  player[5] + 
+           " | "  + player[6] + " | " + player[7] + "lbs" + " | " +
+           player[11] + "<br/>" + "Born: " + player[8] + " (" + player[9] + " years old)<br/>" + 
+           "Experience: " + player[10] + " years </p>");
+        refreshGraph();
+    });
+}(jQuery)); 
+
+var x = d3.time.scale()
+.range([10, 280])
+var y = d3.scale.linear()
+.range([180, 10])
 
 
-    var courtUrl = "court.jpg";
-    svg.append("defs")
-        .append("pattern")
-        .attr("id", "bg")
-        .attr('patternUnits', 'userSpaceOnUse')
-        .attr("width", max.x)
-        .attr("height", max.y)
-        .append("image")
-        .attr("xlink:href", courtUrl)
-        .attr("width", max.x)
-        .attr("height", max.y);
 
-    svg.append("rect")
-        .attr("x", "0")
-        .attr("y", "0")
-        .attr("width", max.x)
-        .attr("height", max.y)
-        .attr("fill", "url(#bg)");
+var max = { x: 780, y: 650};
+var svg = d3.select("#chart").append("svg:svg")
+.attr("width", max.x)
+.attr("height", max.y)
 
-    var refreshGraph = function() {
-    d3.selectAll('circle').remove();
-      var circles = svg.selectAll("circle").data(data)
-      circles.enter()
-      .append("svg:circle")
-      .attr("r", 4)
-      .attr("cx", function(d) { return d[17] })
-      .attr("cy", function(d) { return d[18] })
-      .style("fill", function(d) { return color[d[20]];})
-      .on("click", function(d) {
-                d3.select("#shotinfo").text("Shooter: " + d[4] + "\nShot Type: " + d[11] + 
-                     "\nQuarter: " + d[7] + " Time: " + d[8] + ":" + d[9] +
-                      "\nShot Distance: " + d[16] + " feet\nShot Made:" + d[20])
-                $("#vid").remove();
-                $("#sideInfo").append("<a href=\"#\" id=\"vid\">View Shot</a>");
 
-                $('#vid').on('click', function () {
-                    $.featherlight({iframe: 'http://stats.nba.com/cvp.html?GameID='+ d[1] + '&GameEventID=' + d[2] + '#',  iframeWidth: 850,
+var courtUrl = "court.jpg";
+svg.append("defs")
+.append("pattern")
+.attr("id", "bg")
+.attr('patternUnits', 'userSpaceOnUse')
+.attr("width", max.x)
+.attr("height", max.y)
+.append("image")
+.attr("xlink:href", courtUrl)
+.attr("width", max.x)
+.attr("height", max.y);
+
+svg.append("rect")
+.attr("x", "0")
+.attr("y", "0")
+.attr("width", max.x)
+.attr("height", max.y)
+.attr("fill", "url(#bg)");
+
+
+var refreshGraph = function() {
+    $.ajax({
+        url: shotURL,
+        jsonp: "callback",
+        dataType: "jsonp",
+        success: function( response ) {
+            data = response['resultSets'][0]['rowSet'];
+            console.log(data);
+            // refreshGraph();
+
+        //found correct range by hand..varies with svg
+        var xScale = d3.scale.linear()
+            .domain([-250, 250])
+            .range([42, 738]);
+        var yScale = d3.scale.linear()
+            .domain([-1,0, -150])
+            .range([590,589, 371]);
+
+        var xValue = function(d) { 
+            return xScale(-d[17]);}
+        var yValue = function(d) { 
+            return yScale(-d[18]);}
+
+        d3.selectAll('circle').remove();
+        var circles = svg.selectAll("circle").data(data)
+        circles.enter()
+        .append("svg:circle")
+        .attr("r", 4)
+        .attr("cx", function(d) { return  xValue(d);})
+        .attr("cy", function(d) { return yValue(d);})
+        .style("fill", function(d) { return color[d[20]];})
+        .on("mouseout", function(d) {
+            d3.select(this).style("opacity", 1);
+        })
+        .on("mouseover", function(d) {
+                    $(".tooltip").remove();
+            // add the tooltip area to the webpage
+            var tooltip = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+            d3.select(this).style("opacity", 0.5);
+
+            $("#vid").remove();
+            tooltip.transition()
+            .duration(200)
+            .style("opacity", .9);
+
+            tooltip.html((d[20] ? "Made " : "Missed ") + d[11] +  "<br/>" + 
+                "Quarter: " + d[7] + " Time: " + d[8] + ":" + (d[9] < 10 ? "0" : "") + d[9] +  "<br/>" + 
+                "Shot Distance: " + d[16] + " feet"  + "<br/>" +  
+                "<a href=\"#\" id=\"vid\">View Shot</a>")
+            .style("left", (d3.event.pageX + 5) + "px")
+            .style("top", (d3.event.pageY - 28) + "px");
+            $('#vid').on('click', function () {
+                $.featherlight({iframe: 'http://stats.nba.com/cvp.html?GameID='+ d[1] + '&GameEventID=' + d[2] + '#',  iframeWidth: 850,
                     iframeHeight: 360});          
+            }); 
+        });
+
+
+circles.exit();
+        }
     }); 
-      })
-
-      circles.exit()
-      .remove()
-    }
-
-    // refreshGraph()
+}
 
 });

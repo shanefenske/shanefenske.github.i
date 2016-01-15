@@ -16,7 +16,7 @@
     <button class="navbar-toggler hidden-sm-up pull-right" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
         ☰
     </button>
-    <h1 class="navbar-brand" href="#" style="padding-bottom: 0">NBA Shot Charts</h1>
+    <h1 class="navbar-brand" href="#" style="padding-bottom: 0">NBA Shot Charts By: Shane Fenske</h1>
 <!--     <div class="collapse navbar-toggleable-xs" id="collapsingNavbar">
         <ul class="nav navbar-nav pull-right">
             <li class="nav-item">
@@ -31,7 +31,7 @@
             <select id="teams">
                 <option>Atlanta Hawks</option>
                 <option>Boston Celtics</option>
-                <option>Brooklyn Nets</option>
+                <option selected>Brooklyn Nets</option>
                 <option>Charlotte Hornets</option>
                 <option>Chicago Bulls</option>
                 <option>Cleveland Cavaliers</option>
@@ -63,6 +63,22 @@
             <br>
             <select id="players">   
             </select>
+<!-- 
+            SeasonType
+TeamID
+PlayerID
+GameID
+Outcome
+Location
+Month
+DateFrom
+DateTo
+OpponentTeamID
+VsConference
+Period
+LastNGames -->
+
+
             <br>
             <button>Generate Chart</button>
             
@@ -70,47 +86,17 @@
         </div>
         <!--/col-->
       
-        <div class="col-md-6 col-lg-8 main">
-            <div id="chart"> 
-<!--             <iframe style="width: 600px; height: 400px;"
-                src="http://stats.nba.com/cvp.html?GameID=0021500550&GameEventID=14#"></iframe>  -->
-            </div>      
-<!--                 <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead class="thead-inverse">
-                            <tr>
-                                <th>#</th>
-                                <th>Label</th>
-                                <th>Header</th>
-                                <th>Column</th>
-                                <th>Data</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1,001</td>
-                                <td>responsive</td>
-                                <td>bootstrap</td>
-                                <td>cards</td>
-                                <td>grid</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div> -->
+        <div class="col-md-5 col-lg-7 main">
+            <div id="chart"> </div>      
+
         </div>
-        <div class="col-md-3 col-lg-2" id="sideInfo"> 
+        <div class="col-md-4 col-lg-3" id="sideInfo"> 
             <p id="shotinfo"> </p>
         </div>
 
     </div>
 </div>
-<!-- <a href="#" data-featherlight="#mylightbox">Open element in lightbox</a>
-<div id="mylightbox">
-    <iframe style="width: 600px; height: 400px;"
-                src="http://stats.nba.com/cvp.html?GameID=0021500550&GameEventID=14#"></iframe>
 
-</div> -->
-<a href="#" id="vid">Watch shot</a>
 </div>
 <!--/.container-->
 <footer class="container-fluid">
