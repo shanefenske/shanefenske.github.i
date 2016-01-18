@@ -176,7 +176,7 @@ var refreshGraph = function() {
         var xValue = function(d) { 
             return xScale(-d[17]);}
         var yValue = function(d) { 
-            return yScale(-d[18]);}
+            return (d[16] > 45 ? 0 : yScale(-d[18]));}
 
         d3.selectAll('circle').remove();
         var circles = svg.selectAll("circle").data(data)
