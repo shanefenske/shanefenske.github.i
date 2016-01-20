@@ -66,25 +66,10 @@ $(document).ready(function() {
                 }
 
                 if(first) {
-                    //select joe johnson
-                    $("#players").val(3);
-                    player = players[3];
-                    id = 2207;
-                    shotURL = 'http://stats.nba.com/stats/shotchartdetail?CFID=33&CFPAR' +
-                    'AMS=2015-16&ContextFilter=&ContextMeasure=FGA&DateFrom=&D' +
-                    'ateTo=&GameID=&GameSegment=&LastNGames=0&LeagueID=00&Loca' +
-                    'tion=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&' +
-                    'PaceAdjust=N&PerMode=PerGame&Period=0&PlayerID='+id+'&Plu' +
-                    'sMinus=N&Position=&Rank=N&RookieYear=&Season=2015-16&Seas' +
-                    'onSegment=&SeasonType=Regular+Season&TeamID=0&VsConferenc' +
-                    'e=&VsDivision=&mode=Advanced&showDetails=0&showShots=1&sh' +
-                    'owZones=0';
-                    $("#sideInfo").append("<img id=\"headPic\" src=\"http://stats.nba.com/media/players/230x185/" + id + ".png \" >");
-                    $("#sideInfo").append("<p id=\"basicInfo\">" + player[3] + "<br/>#" + player[4] + " | " +  player[5] + 
-                       " | "  + player[6] + " | " + player[7] + "lbs" + " | " +
-                       player[11] + "<br/>" + "Born: " + player[8] + " (" + player[9] + " years old)<br/>" + 
-                       "Experience: " + player[10] + " years </p>");
-                    refreshGraph();
+                    joeJohnsonIndex = 3
+                    JoeJohnsonid = 2207;
+                    player = players[joeJohnsonIndex];
+                    loadVisual(joeJohnsonIndex,JoeJohnsonid)
                 }
             }
         });
@@ -94,31 +79,41 @@ $( '#teams').change(function() {
     loadPlayers();
 }); 
 
+
+
+function loadVisual(index,id,_callback) {
+    $("#players").val(index);
+    shotURL = 'http://stats.nba.com/stats/shotchartdetail?CFID=33&CFPAR' +
+    'AMS=2015-16&ContextFilter=&ContextMeasure=FGA&DateFrom=&D' +
+    'ateTo=&GameID=&GameSegment=&LastNGames=0&LeagueID=00&Loca' +
+    'tion=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&' +
+    'PaceAdjust=N&PerMode=PerGame&Period=0&PlayerID='+id+'&Plu' +
+    'sMinus=N&Position=&Rank=N&RookieYear=&Season=2015-16&Seas' +
+    'onSegment=&SeasonType=Regular+Season&TeamID=0&VsConferenc' +
+    'e=&VsDivision=&mode=Advanced&showDetails=0&showShots=1&sh' +
+    'owZones=0';
+    $("#headPic").remove();
+    $("#basicInfo").remove();
+    $("#sideInfo").append("<img id=\"headPic\" src=\"http://stats.nba.com/media/players/230x185/" + id + ".png \" >");
+    $("#sideInfo").append("<p id=\"basicInfo\">" + player[3] + "<br/>#" + player[4] + " | " +  player[5] + 
+       " | "  + player[6] + " | " + player[7] + "lbs" + " | " +
+       player[11] + "<br/>" + "Born: " + player[8] + " (" + player[9] + " years old)<br/>" + 
+       "Experience: " + player[10] + " years </p>");
+    refreshGraph(); 
+
+}
+
+
+
 (function ($) {
     $('button').on('click', function () {  
         $(".tooltip").remove();   
         index = $("#players")[0].selectedIndex;
+        console.log("selected player" + index)
         player = players[index];
         id = player[12];
-        shotURL = 'http://stats.nba.com/stats/shotchartdetail?CFID=33&CFPAR' +
-        'AMS=2015-16&ContextFilter=&ContextMeasure=FGA&DateFrom=&D' +
-        'ateTo=&GameID=&GameSegment=&LastNGames=0&LeagueID=00&Loca' +
-        'tion=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&' +
-        'PaceAdjust=N&PerMode=PerGame&Period=0&PlayerID='+id+'&Plu' +
-        'sMinus=N&Position=&Rank=N&RookieYear=&Season=2015-16&Seas' +
-        'onSegment=&SeasonType=Regular+Season&TeamID=0&VsConferenc' +
-        'e=&VsDivision=&mode=Advanced&showDetails=0&showShots=1&sh' +
-        'owZones=0';
+        loadVisual(index,id);
 
-
-        $("#headPic").remove();
-        $("#basicInfo").remove();
-        $("#sideInfo").append("<img id=\"headPic\" src=\"http://stats.nba.com/media/players/230x185/" + id + ".png \" >");
-        $("#sideInfo").append("<p id=\"basicInfo\">" + player[3] + "<br/>#" + player[4] + " | " +  player[5] + 
-           " | "  + player[6] + " | " + player[7] + "lbs" + " | " +
-           player[11] + "<br/>" + "Born: " + player[8] + " (" + player[9] + " years old)<br/>" + 
-           "Experience: " + player[10] + " years </p>");
-        refreshGraph();
     });
 }(jQuery)); 
 
