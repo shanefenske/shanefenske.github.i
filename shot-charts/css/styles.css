@@ -111,6 +111,7 @@ body.modal-open {
     -ms-transform: rotate(-44deg);
     transform: rotate(-44deg);
 }
+/****************************************************************************************/
 
 .tooltip {
   /* basic */
@@ -132,8 +133,11 @@ body.modal-open {
   font-size:11px;
   line-height:16px;
   color:white;
+  z-index: 100000;
 }
 
 #sideInfo {
     text-align: center;
 }
+
+

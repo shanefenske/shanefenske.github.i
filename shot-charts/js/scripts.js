@@ -82,16 +82,42 @@ $( '#teams').change(function() {
 
 
 function loadVisual(index,id,_callback) {
-    $("#players").val(index);
+    $("#players ").val(index);
+    var season = $("#year option:selected").text();
+    var locationText = $("#location option:selected").text();
+    if("Home and Road Games" == locationText) {
+        var location = "";
+    }
+    else {
+        var location = locationText.substring(0, 4);
+    } 
+
+    var periodText = $("#period option:selected").text();
+    if("All Periods" == periodText) {
+        var period = 0;
+    }
+    else {
+        var period = periodText.substring(0, 1);
+    }
+
+    var conferenceText = $("#conference option:selected").text();
+    if("vs. East and vs. West" == conferenceText) {
+        var conference = "";
+    }
+    else {
+        var conference = conferenceText.substr(conferenceText.length - 4);;
+    }  
+
     shotURL = 'http://stats.nba.com/stats/shotchartdetail?CFID=33&CFPAR' +
-    'AMS=2015-16&ContextFilter=&ContextMeasure=FGA&DateFrom=&D' +
+    'AMS='+season+'&ContextFilter=&ContextMeasure=FGA&DateFrom=&D' +
     'ateTo=&GameID=&GameSegment=&LastNGames=0&LeagueID=00&Loca' +
-    'tion=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&' +
-    'PaceAdjust=N&PerMode=PerGame&Period=0&PlayerID='+id+'&Plu' +
-    'sMinus=N&Position=&Rank=N&RookieYear=&Season=2015-16&Seas' +
+    'tion='+location+'&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&' +
+    'PaceAdjust=N&PerMode=PerGame&period='+period+'&PlayerID='+id+'&Plu' +
+    'sMinus=N&Position=&Rank=N&RookieYear=&Season='+season+'&Seas' +
     'onSegment=&SeasonType=Regular+Season&TeamID=0&VsConferenc' +
-    'e=&VsDivision=&mode=Advanced&showDetails=0&showShots=1&sh' +
+    'e='+conference+'&VsDivision=&mode=Advanced&showDetails=0&showShots=1&sh' +
     'owZones=0';
+    console.log(shotURL);
     $("#headPic").remove();
     $("#basicInfo").remove();
     $("#sideInfo").append("<img id=\"headPic\" src=\"http://stats.nba.com/media/players/230x185/" + id + ".png \" >");

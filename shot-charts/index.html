@@ -28,6 +28,10 @@
 <div class="container-fluid" id="main">
     <div class="row row-offcanvas row-offcanvas-left">
         <div class="col-md-3 col-lg-2 sidebar-offcanvas" id="sidebar" role="navigation"> 
+            <select id="year">
+                <option selected>2015-16</option>
+                <option>2014-15</option>                
+            </select>
             <select id="teams">
                 <option>Atlanta Hawks</option>
                 <option>Boston Celtics</option>
@@ -63,8 +67,25 @@
             <br>
             <select id="players">   
             </select>
+            <select id="location">
+                <option selected>Home and Road Games</option>
+                <option>Home Games</option>
+                <option>Road Games</option>
+            </select>
 
+            <select id="period">
+                <option selected>All Periods</option>
+                <option>1st Period</option>
+                <option>2nd Period</option>
+                <option>3rd Period</option>
+                <option>4th Period</option>                
+            </select>
 
+            <select id="conference">
+                <option selected>vs. East and vs. West</option>
+                <option>vs. East</option>
+                <option>vs. West</option>              
+            </select>            
 
             <br>
             <button>Generate Chart</button>

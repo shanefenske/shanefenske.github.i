@@ -1,0 +1,31 @@
+add filters below
+
+
+http://stats.nba.com/stats/shotchartdetail?CFID=33&CFPARAMS=2015-16&ContextFilter=&ContextMeasure=FGA&DateFrom=&DateTo=&GameID=&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PaceAdjust=N&PerMode=PerGame&Period=0&PlayerID=201935&PlusMinus=N&Position=&Rank=N&RookieYear=&Season=2015-16&SeasonSegment=&SeasonType=fn&TeamID=0&VsConference=&VsDivision=&mode=Advanced&showDetails=0&showShots=1&showZones=0
+
+DateFrom
+DateTo
+OpponentTeamID?
+
+
+
+Season 2015-16
+Location=Home or Away
+LastNGames
+Period
+VsConference=West
+ VsDivision must match the regular expression '^((Atlantic)|(Central)|(Northwest)|(Pacific)|(Southeast)|(Southwest)|(East)|(West))?$'.
+ The field GameSegment must match the regular expression '^((First Half)|(Overtime)|(Second Half))?$'.
+
+ The field SeasonSegment must match the regular expression '^((Post All-Star)|(Pre All-Star))?$'.
+
+ The field Outcome must match the regular expression '^((W)|(L))?$'
+
+ Month = #
+
+
+The field SeasonType must match the regular expression '^(Regular Season)|(Pre Season)|(Playoffs)|(All Star)$'.
+
+change teams in order to add more seasons
+
+http://stats.nba.com/stats/shotchartdetail?CFID=33&CFPARAMS=2015-16&ContextFilter=&ContextMeasure=FGA&DateFrom=&DateTo=&GameID=&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PaceAdjust=N&PerMode=PerGame&Period=45&PlayerID=2207&PlusMinus=N&Position=&Rank=N&RookieYear=&Season=2015-16&SeasonSegment=&SeasonType=Regular+Season&TeamID=0&VsConference=&VsDivision=&mode=Advanced&showDetails=0&showShots=1&showZones=0&callback=jQuery19107665205178782344_1453311212611&_=1453311212615
