@@ -105,16 +105,25 @@ function loadVisual(index,id,_callback) {
         var conference = "";
     }
     else {
-        var conference = conferenceText.substr(conferenceText.length - 4);;
-    }  
+        var conference = $("#conference option:selected").val();
+    }
+    
+
+    var outcome = $("#outcome option:selected").val();      
+
+    // TODO: just realized all of the previous code should be done like this
+    var seasontype = $("#seasontype option:selected").val();
+    
+    var month = $("#month option:selected").val();
+
 
     shotURL = 'http://stats.nba.com/stats/shotchartdetail?CFID=33&CFPAR' +
     'AMS='+season+'&ContextFilter=&ContextMeasure=FGA&DateFrom=&D' +
     'ateTo=&GameID=&GameSegment=&LastNGames=0&LeagueID=00&Loca' +
-    'tion='+location+'&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&' +
+    'tion='+location+'&MeasureType=Base&Month='+month+'&OpponentTeamID=0&Outcome='+outcome +'&' +
     'PaceAdjust=N&PerMode=PerGame&period='+period+'&PlayerID='+id+'&Plu' +
     'sMinus=N&Position=&Rank=N&RookieYear=&Season='+season+'&Seas' +
-    'onSegment=&SeasonType=Regular+Season&TeamID=0&VsConferenc' +
+    'onSegment=&SeasonType='+seasontype+'&TeamID=0&VsConferenc' +
     'e='+conference+'&VsDivision=&mode=Advanced&showDetails=0&showShots=1&sh' +
     'owZones=0';
     console.log(shotURL);
