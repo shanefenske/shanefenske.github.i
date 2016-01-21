@@ -3,6 +3,8 @@ $(document).ready(function() {
     var players;
     var index;
     var player;
+    var spinner;
+    var target;
     var id;
     var shotURL;
     var color = ['#FF4136','#2ECC40']
@@ -40,6 +42,7 @@ $(document).ready(function() {
     };
 
     loadPlayers(true);
+    startSpinner();
 
 
 
@@ -54,8 +57,6 @@ $(document).ready(function() {
             url: 'http://stats.nba.com/stats/commonteamroster?&Season=2015-16&TeamID=' + team,
             jsonp: "callback",
             dataType: "jsonp",
-
-            // Work with the response
             success: function( response ) {
                 players = response['resultSets'][0]['rowSet'];
                 // remove old set of players 
@@ -137,11 +138,38 @@ function loadVisual(index,id,_callback) {
     refreshGraph(); 
 
 }
-
-
+    function startSpinner() {
+        var opts = {
+          lines: 13 // The number of lines to draw
+        , length: 28 // The length of each line
+        , width: 14 // The line thickness
+        , radius: 42 // The radius of the inner circle
+        , scale: 1 // Scales overall size of the spinner
+        , corners: 1 // Corner roundness (0..1)
+        , color: '#000' // #rgb or #rrggbb or array of colors
+        , opacity: 0.25 // Opacity of the lines
+        , rotate: 0 // The rotation offset
+        , direction: 1 // 1: clockwise, -1: counterclockwise
+        , speed: 1 // Rounds per second
+        , trail: 60 // Afterglow percentage
+        , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+        , zIndex: 2e9 // The z-index (defaults to 2000000000)
+        , className: 'spinner' // The CSS class to assign to the spinner
+        , top: '50%' // Top position relative to parent
+        , left: '50%' // Left position relative to parent
+        , shadow: false // Whether to render a shadow
+        , hwaccel: false // Whether to use hardware acceleration
+        , position: 'absolute' // Element positioning
+        }
+        spinner = new Spinner(opts);
+        target = document.getElementById('chart');
+        spinner.spin(target);
+    }
 
 (function ($) {
-    $('button').on('click', function () {  
+    $('button').on('click', function () {
+        startSpinner();
+
         $(".tooltip").remove();   
         index = $("#players")[0].selectedIndex;
         console.log("selected player" + index)
@@ -191,6 +219,7 @@ var refreshGraph = function() {
         jsonp: "callback",
         dataType: "jsonp",
         success: function( response ) {
+            spinner.stop()
             data = response['resultSets'][0]['rowSet'];
             console.log(data);
             // refreshGraph();
