@@ -11,16 +11,19 @@
   </style>
   </head>
   <body>
+    <button>svg to png</button>
+    <canvas id="canvas"></canvas>
     <script type="text/javascript">
     //height of each row in the heatmap
     var h = 50;
     //width of each column in the heatmap
-    var w = 70;
+    var w = 100;
 
     //attach a SVG node to the document
     //height and width defined by the row/column lengths
-    var mySVG = d3.select("body")
+    var svg = d3.select("body")
       .append("svg")
+      .attr("id","svg")
       .attr("width", (w * cols.length) + 400) 
       .attr("height", (h * rows.length + 100))
       .style('position','absolute')
@@ -33,7 +36,7 @@
       .range(["#002db3", "white", "#cc0000"]);
 
     //generate the heatmap
-    var heatmapRow = mySVG.selectAll(".heatmap")
+    var heatmapRow = svg.selectAll(".heatmap")
       .data(data)
       .enter().append("g");
 
@@ -58,7 +61,7 @@
         });
 
     //label columns
-    var columnLabel = mySVG.selectAll(".colLabel")
+    var columnLabel = svg.selectAll(".colLabel")
       .data(cols)
       .enter().append('svg:text')
       .attr('x', function(d,i) {
@@ -70,7 +73,7 @@
       .text(function(d) {return d;});
 
     //label columns
-    var rowLabel = mySVG.selectAll(".rowLabel")
+    var rowLabel = svg.selectAll(".rowLabel")
       .data(rows)
       .enter().append('svg:text')
       .attr('x', function(d,i) {
@@ -85,7 +88,7 @@
 
 
 
-mySVG.append("text")
+svg.append("text")
         .attr("x", ((w * cols.length +250) /2  ))             
         .attr("y", 30 )
         .attr("text-anchor", "middle")  
@@ -94,21 +97,15 @@ mySVG.append("text")
         .text("Screener");
 
 
-mySVG.append("text")
-        .attr("x", ((w * cols.length +250) /2  ))             
-        .attr("y", 30 )
+svg.append("text")
+        .attr("x", 0)            
+        .attr("y", 0)
         .attr("text-anchor", "middle")  
         .style("font-size", "16px") 
         .style("text-style", "bold")  
-        .text("Screener")
-        .attr("transform", "rotate(65)" );
+        .text("Ball Handler")
+        .attr("transform", "translate(25,250) rotate("+-90+")");
 
-// svg.append("text")
-//         .attr("x", 20)             
-//         .attr("y", 100 )
-//         .attr("transform", "translate(0," + (h * rows.length + 100) + ")")
-//             .attr("dx", "-.8em")
-//             .attr("dy", ".15em")
 //             .attr("transform", "rotate(-65)" );
         //expression value label
         var expLab = d3.select("body")
@@ -130,15 +127,6 @@ mySVG.append("text")
           .attr('stroke-width',1)
           .attr('stroke','black')
 
-          // output = '<b>' + rows[i] + '</b><br>';
-          // for (var j = 0 , count = data[i].length; j < count; j ++ ) {
-          //   output = data[i][j][0] + ", ";
-          // }
-
-          // expLab
-          //   .style('top',(i * h))
-          //   .style('display','block')
-          //   .html(output.substring(0,output.length - 3));
       })
       .on('mouseout', function(d,i) {
         d3.select(this)
@@ -148,6 +136,52 @@ mySVG.append("text")
         expLab
           .style('display','none')
       });
+
+
+var btn = document.querySelector('button');
+var svg = document.querySelector('svg');
+var canvas = document.querySelector('canvas');
+
+function triggerDownload (imgURI) {
+  var evt = new MouseEvent('click', {
+    view: window,
+    bubbles: false,
+    cancelable: true
+  });
+
+  var a = document.createElement('a');
+  a.setAttribute('download', 'MY_COOL_IMAGE.png');
+  a.setAttribute('href', imgURI);
+  a.setAttribute('target', '_blank');
+
+  a.dispatchEvent(evt);
+}
+
+btn.addEventListener('click', function () {
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  var data = (new XMLSerializer()).serializeToString(svg);
+  var DOMURL = window.URL || window.webkitURL || window;
+
+  var img = new Image();
+  var svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
+  var url = DOMURL.createObjectURL(svgBlob);
+
+  img.onload = function () {
+    ctx.drawImage(img, 0, 0);
+    DOMURL.revokeObjectURL(url);
+
+    var imgURI = canvas
+        .toDataURL('image/png')
+        .replace('image/png', 'image/octet-stream');
+
+    triggerDownload(imgURI);
+  };
+
+  img.src = url;
+});
+
    </script>
+
   </body>
 </html>
