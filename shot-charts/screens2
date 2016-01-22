@@ -1,76 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>NBA Data Visualizations with d3.js</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <!-- jQuery Version 1.11.1 -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+<html>
+  <head>
+  <link rel="stylesheet" href="css/styles.css" />
   <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
-  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script type="text/javascript" src="data.js"></script>
-
-    <!-- Custom CSS -->
-    <style>
+  <style>
     body {
-        padding-top: 70px;
-        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+      margin: 0px;
+      padding: 0px;
+      font: 12px Arial;
     }
-    </style>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-
-                <a class="navbar-brand" style="color:white">NBA-Viz</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div >
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a  href="/shots.html">Shot Carts</a>
-                    </li>
-                    <li>
-                        <a style="color:white" href="screens.html">Screens</a>
-                    </li>
-                </ul>
-            </div>
-
-
-
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-
-    <!-- Page Content -->
-    <div class="container">
-
-        <div  class="row">
-            <div  class="col-lg-12">
- <select >
+  </style>
+  </head>
+  <body>
+  <select >
     <option selected>Brooklyn Nets</option>             
 </select>
   <a id='imgId'>Export to PNG</a>
@@ -241,15 +184,6 @@ img.onload = function(){
 }
 img.src = url  
 </script>
-            </div>
-        </div>
-        <!-- /.row -->
 
-    </div>
-    <!-- /.container -->
-
-    
-
-</body>
-
+  </body>
 </html>

@@ -13,9 +13,11 @@ OpponentTeamID?
 
 
 
-fix css
+fix css -- spinned moves with sidebar/nav is mad/get it all fixed on any size
+heatmap -- change data--make writeup--downlaod to svg--get it on a tab
+
 encode efficiencies
-make an example of the pick and roll heat map
+get games with logos
 change teams in order to add more seasons and have the opponent team updated then too
 export to png
 
