@@ -1,6 +1,7 @@
 <html>
   <head>
   <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script type="text/javascript" src="data.js"></script>
   <style>
     body {
@@ -11,8 +12,6 @@
   </style>
   </head>
   <body>
-    <button>svg to png</button>
-    <canvas id="canvas"></canvas>
     <script type="text/javascript">
     //height of each row in the heatmap
     var h = 50;
@@ -26,7 +25,7 @@
       .attr("id","svg")
       .attr("width", (w * cols.length) + 400) 
       .attr("height", (h * rows.length + 100))
-      .style('position','absolute')
+      // .style('position','absolute')
       .style('top',0)
       .style('left',0);
 
@@ -137,7 +136,11 @@ svg.append("text")
           .style('display','none')
       });
 
+   </script>
+   <button>Click</button>
+   <canvas id="canvas"></canvas>
 
+<script>
 var btn = document.querySelector('button');
 var svg = document.querySelector('svg');
 var canvas = document.querySelector('canvas');
@@ -180,8 +183,7 @@ btn.addEventListener('click', function () {
 
   img.src = url;
 });
-
-   </script>
+</script>
 
   </body>
 </html>

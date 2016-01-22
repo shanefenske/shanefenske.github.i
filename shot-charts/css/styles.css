@@ -18,7 +18,7 @@ body.modal-open {
 }
 
 #sidebar {
-   padding-left:0;
+   padding-left: 1em;
 }
 
 /*
@@ -138,6 +138,14 @@ body.modal-open {
 
 #sideInfo {
     text-align: center;
+}
+
+a {
+  color:gold;
+}
+
+a:hover {
+  color:gold;
 }
 
 
