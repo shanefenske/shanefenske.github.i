@@ -69,13 +69,13 @@
     <script>
     $( document ).ready(function() {
       $(".navbar").css({
-    'width': $( window ).width(); + 'px')
+    'width': ($('#heatmap').width() > $('body').width() ? $('#heatmap').width() : $('body').width()) + 'px'
   });
 });
-    
+
 $( window ).resize(function() {  
   $(".navbar").css({
-    'width': $( window ).width(); + 'px')
+    'width': ($('#heatmap').width() > $('body').width() ? $('#heatmap').width() : $('body').width()) + 'px'
   });
 });
     </script>
