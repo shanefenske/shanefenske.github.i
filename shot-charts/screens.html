@@ -20,20 +20,6 @@
   
   <script type="text/javascript" src="data.js"></script>
 
-    <!-- Custom CSS -->
-    <style>
-    body {
-        padding-top: 70px;
-        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    }
-    </style>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
 </head>
 
@@ -68,12 +54,32 @@
     <!-- Page Content -->
     <div class="container">
 
-        <div  class="row">
+        <div  id="heatcontainer" class="row">
             <div  class="col-lg-12">
- <select >
-    <option selected>Brooklyn Nets</option>             
+             <select >
+        <option selected>Brooklyn Nets</option>             
 </select>
   <a id='imgId'>Export to PNG</a>
+                        </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+    <script>
+    $( document ).ready(function() {
+      $(".navbar").css({
+    'width': $( window ).width(); + 'px')
+  });
+});
+    
+$( window ).resize(function() {  
+  $(".navbar").css({
+    'width': $( window ).width(); + 'px')
+  });
+});
+    </script>
+
     <script type="text/javascript">
     //height of each row in the heatmap
     var h = 50;
@@ -86,7 +92,7 @@
 
     //attach a SVG node to the document
     //height and width defined by the row/column lengths
-    var svg = d3.select("body")
+    var svg = d3.select("#heatcontainer")
       .append("svg") 
       .attr("id","heatmap")
       .attr("xmlns","http://www.w3.org/2000/svg")
@@ -241,12 +247,7 @@ img.onload = function(){
 }
 img.src = url  
 </script>
-            </div>
-        </div>
-        <!-- /.row -->
 
-    </div>
-    <!-- /.container -->
 
     
 
