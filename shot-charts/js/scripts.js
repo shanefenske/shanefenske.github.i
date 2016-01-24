@@ -299,7 +299,7 @@ ctx.drawImage(img, 0, 0, max.x, max.y);
 window.URL.revokeObjectURL(url);
 var canvasdata = canvas.toDataURL('image/png');
 var a = document.getElementById('imgId');
-a.download = "export_" + Date.now() + ".png";
+a.download = player + ".png";
 a.href=canvasdata;   
 }
 img.src = url 
