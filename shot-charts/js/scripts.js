@@ -252,7 +252,7 @@ var refreshGraph = function() {
                     $(".tooltip").remove();
             // add the tooltip area to the webpage
             var tooltip = d3.select("body").append("div")
-            .attr("class", "tooltip")
+            .attr("class", "tooltip shots")
             .style("opacity", 0);
 
             d3.select(this).style("opacity", 0.5);

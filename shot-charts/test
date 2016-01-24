@@ -1,57 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-
+<html>
+  <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NBA Shotcharts</title>
+    <meta name="description" content="NBA Shot Charts Visualized using d3.js." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>NBA Data Visualizations with d3.js</title>
-
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.css" type="text/css" rel="stylesheet" />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
-    <script type="text/javascript" src="data.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="css/styles.css" />
-
-</head>
-
-<body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <a class="navbar-brand" style="color:white">NBA-Viz</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div >
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a style="color:white" href="/">Shot Carts</a>
-                    </li>
-                    <li>
-                        <a  href="screens.html">Screens</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-
-    <!-- Page Content -->
-    <div class="container">
-    <div class="panel panel-default ol-md-12 col-lg-4">
-        <div class="panel-body shots-side">
-
-            <div id="sideInfo"> 
-                <p id="shotinfo"> </p>
-            </div>
-
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body >
+    <nav class="navbar navbar-fixed-top navbar-dark bg-primary">
+    <button class="navbar-toggler hidden-sm-up pull-right" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+        ☰
+    </button>
+    <h1 class="navbar-brand" href="#" style="padding-bottom: 0">NBA Shot Charts</h1>
+<!--     <div class="collapse navbar-toggleable-xs" id="collapsingNavbar">
+        <ul class="nav navbar-nav pull-right">
+            <li class="nav-item">
+                Created by Shane f
+            </li>
+        </ul>
+    </div> -->
+</nav>
+<div class="container-fluid" id="main">
+    <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-md-3 col-lg-2 sidebar-offcanvas" id="sidebar" role="navigation"> 
             <select id="year">
                 <option selected>2015-16</option>
                 <option>2014-15</option>                
@@ -88,7 +64,7 @@
                 <option>Utah Jazz</option>
                 <option>Washington Wizards</option>
             </select>
-
+            <br>
             <select id="players">   
             </select>
             <select id="location">
@@ -139,47 +115,31 @@
                 <option value="2">November</option>
                 <option value="13">December</option>                                
             </select>
+
+            <br>
             <button>Generate Chart</button>
+            
 
         </div>
-    </div>
-<!--         <div  class="col-md-12 col-lg-4" style="background-color: blue; ">
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, ratione. Veniam doloribus nisi, cum amet, facilis incidunt quos, vitae quasi alias esse voluptate minus labore fugiat explicabo consequatur. Tenetur, voluptatibus?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque quos aspernatur, enim perferendis. Dolorum veniam ullam quod voluptatibus, voluptates enim, ipsum reiciendis, distinctio fugit laborum consequatur atque perspiciatis illo quas.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut esse eaque numquam optio laudantium, accusantium fugit et quo voluptatem reprehenderit quas eos deserunt, perferendis, beatae. Fuga nemo, repellendus ad error.
-            </p>        
-        </div> -->
-        <div  class="col-md-12 col-lg-8 main">
-            <div id="chart"> </div> 
+        <!--/col-->
+      
+        <div class="col-md-5 col-lg-7 main">
+            <div id="chart"> </div>      
         </div>
-       
-        
-        
-    <!-- /.row -->
+        <div class="col-md-4 col-lg-3" id="sideInfo"> 
+            <p id="shotinfo"> </p>
+        </div>
+
+    </div>
+</div>
 
 </div>
-<!-- /.container -->
-
-
-<script>
-// sketchy way to make sure nav bar is right size on small screens
-    $( document ).ready(function() {
-      $(".navbar").css({
-        'width': ($('#heatmap').width() > $('body').width() ? $('#heatmap').width() : $('body').width()) + 'px'
-    });
-  });
-
-    $( window ).resize(function() {  
-      $(".navbar").css({
-        'width': ($('#heatmap').width() > $('body').width() ? $('#heatmap').width() : $('body').width()) + 'px'
-    });
-  });
-</script>
-
+<!--/.container-->
 <footer class="container-fluid">
     <p class="text-right small">Created by: Shane Fenske</p>
 </footer>
+
+
 
     <!--scripts loaded here-->
     
@@ -191,6 +151,6 @@
     
   <!-- // <script src="js/chart.js"></script> -->
     <script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
-</body>
-
+  </body>
 </html>
+
