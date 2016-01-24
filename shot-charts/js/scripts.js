@@ -59,7 +59,7 @@ $(document).ready(function() {
         var team = teams[$('#teams option:selected').text()];
 
         $.ajax({
-            url: 'http://stats.nba.com/stats/commonteamroster?&Season=2015-16&TeamID=' + team,
+            url: 'http://stats.nba.com/stats/commonteamroster?&Season='+$("#year option:selected").text()+'&TeamID=' + team,
             jsonp: "callback",
             dataType: "jsonp",
             success: function( response ) {
@@ -85,6 +85,9 @@ $( '#teams').change(function() {
     loadPlayers();
 }); 
 
+$( '#year').change(function() {
+    loadPlayers();
+});
 
 
 function loadVisual(index,id,_callback) {
@@ -111,7 +114,7 @@ function loadVisual(index,id,_callback) {
         var conference = "";
     }
     else {
-        var conference = $("#conference option:selected").val();
+        var conference = conferenceText.substr(conferenceText.length - 4);;
     }
     
 
