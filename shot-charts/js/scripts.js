@@ -44,7 +44,14 @@ $(document).ready(function() {
     loadPlayers(true);
     startSpinner();
 
-
+    $( ".panel" ).mouseover(function() {
+        $(".tooltip").remove().transition()
+            .duration(200); 
+    });
+    $( "nav" ).mouseover(function() {
+        $(".tooltip").remove().transition()
+            .duration(200); 
+    });
 
     $('[data-toggle=offcanvas]').click(function() {
         $('.row-offcanvas').toggleClass('active');
