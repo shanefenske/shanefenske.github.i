@@ -45,12 +45,10 @@ $(document).ready(function() {
     startSpinner();
 
     $( ".panel" ).mouseover(function() {
-        $(".tooltip").remove().transition()
-            .duration(200); 
+        $(".tooltip").remove();
     });
     $( "nav" ).mouseover(function() {
-        $(".tooltip").remove().transition()
-            .duration(200); 
+        $(".tooltip").remove();
     });
 
     $('[data-toggle=offcanvas]').click(function() {
@@ -292,6 +290,11 @@ var svg_xml = (new XMLSerializer()).serializeToString(shotchart),
 blob = new Blob([svg_xml], {type:'image/svg+xml;charset=utf-8'}),
 url = window.URL.createObjectURL(blob);
 
+var court = new Image();
+court.src = "court.jpg";
+court.width = max.x;
+court.height = max.y;
+
 var img = new Image();
 img.width = max.x;
 img.height = max.y;
@@ -301,6 +304,7 @@ canvas.width = max.x;
 canvas.height = max.y;
 
 var ctx = canvas.getContext('2d');
+ctx.drawImage(court, 0, 0, max.x, max.y);
 ctx.drawImage(img, 0, 0, max.x, max.y);
 
 window.URL.revokeObjectURL(url);
