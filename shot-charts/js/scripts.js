@@ -296,7 +296,7 @@ court.width = max.x;
 court.height = max.y;
 
 var img = new Image();
-img.width = max.x;
+img.width = max.x+100;
 img.height = max.y;
 img.onload = function(){
 var canvas = document.createElement('canvas');
@@ -304,8 +304,8 @@ canvas.width = max.x;
 canvas.height = max.y;
 
 var ctx = canvas.getContext('2d');
-ctx.drawImage(court, 0, 0, max.x, max.y);
-ctx.drawImage(img, 0, 0, max.x, max.y);
+ctx.drawImage(court, 50, 0, max.x - 50, max.y);
+ctx.drawImage(img, 0, 0, max.x + 50, max.y);
 
 window.URL.revokeObjectURL(url);
 var canvasdata = canvas.toDataURL('image/png');
