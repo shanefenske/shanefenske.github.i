@@ -165,7 +165,7 @@ function loadVisual(index,id,_callback) {
         target = document.getElementById('chart');
         spinner.spin(target);
     }
-
+var max = { x: 780, y: 650};
 (function ($) {
     $('button').on('click', function () {
         startSpinner();
@@ -187,10 +187,11 @@ var y = d3.scale.linear()
 
 
 
-var max = { x: 780, y: 650};
+
 var svg = d3.select("#chart").append("svg:svg")
 .attr("width", max.x)
 .attr("height", max.y)
+.attr("id", "shotchart")
 
 
 var courtUrl = "court.jpg";
@@ -211,6 +212,8 @@ svg.append("rect")
 .attr("width", max.x)
 .attr("height", max.y)
 .attr("fill", "url(#bg)");
+
+
 
 
 var refreshGraph = function() {
@@ -276,8 +279,34 @@ var refreshGraph = function() {
 
 
 circles.exit();
+
+var shotchart = document.getElementById('shotchart');
+var svg_xml = (new XMLSerializer()).serializeToString(shotchart),
+blob = new Blob([svg_xml], {type:'image/svg+xml;charset=utf-8'}),
+url = window.URL.createObjectURL(blob);
+
+var img = new Image();
+img.width = max.x;
+img.height = max.y;
+img.onload = function(){
+var canvas = document.createElement('canvas');
+canvas.width = max.x;
+canvas.height = max.y;
+
+var ctx = canvas.getContext('2d');
+ctx.drawImage(img, 0, 0, max.x, max.y);
+
+window.URL.revokeObjectURL(url);
+var canvasdata = canvas.toDataURL('image/png');
+var a = document.getElementById('imgId');
+a.download = "export_" + Date.now() + ".png";
+a.href=canvasdata;   
+}
+img.src = url 
         }
     }); 
+
+
 }
 
 });
