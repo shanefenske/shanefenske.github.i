@@ -16,3 +16,7 @@ body {
 .container {
     position: relative;
 }
+
+button, select {
+    margin: 0 .1em;
+}
