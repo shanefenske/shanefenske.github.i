@@ -72,10 +72,10 @@ $(document).ready(function() {
                 }
 
                 if(first) {
-                    joeJohnsonIndex = 3
-                    JoeJohnsonid = 2207;
-                    player = players[joeJohnsonIndex];
-                    loadVisual(joeJohnsonIndex,JoeJohnsonid)
+                    dameIndex = 0
+                    dameid = 203081;
+                    player = players[dameIndex];
+                    loadVisual(dameIndex,dameid)
                 }
             }
         });
