@@ -503,3 +503,7 @@ fieldset[disabled] .btn-success.active {
   opacity: 0;
   display: none;
 }
+
+section {
+    padding: 100px 0 0 !important;
+}
