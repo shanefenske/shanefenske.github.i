@@ -49,3 +49,7 @@ input:hover {
     opacity: .5; /* Green */
     color: white;
 }
+
+.desc {
+    padding: 2.2em;
+}

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Timeout Effects</title>
+    <title>Effect of Timeouts on Shot Efficiency</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -58,7 +58,7 @@ path {
         <div class="container">
             <div class="navbar-header page-scroll">
 
-                <a class="navbar-brand" href="#page-top">Timeout Effects</a>
+                <a class="navbar-brand" href="#page-top">Effect of Timeouts on Shot Efficiency</a>
             </div>
 
         </div>
@@ -76,7 +76,21 @@ path {
                 </div> -->
 
                 <div class="col-sm-12 chart-controls chart-container" style="height = 2000">
+
                     <div id="option">
+                        <input name="FG%Button" 
+                               type="button" 
+                               value="FG%" 
+                               onclick="updateData('FG%')" />
+                    </div>
+                    
+                    <div id="option">
+                        <input name="3%Button" 
+                               type="button" 
+                               value="3P%" 
+                               onclick="updateData('3P%')" />
+                    </div>                    
+<!--                     <div id="option">
                         <input name="stealsButton" 
                                type="button" 
                                value="Steal" 
@@ -87,34 +101,29 @@ path {
                                type="button" 
                                value="Charges" 
                                onclick="updateData('charges')" />
-                    </div>
+                    </div> -->
 
-                    <div id="option">
-                        <input name="FG%Button" 
-                               type="button" 
-                               value="FG%" 
-                               onclick="updateData('FG%')" />
-                    </div>
                 </div>
 
-
+        
 
 
                 <!-- load the d3.js library -->    
                 <script src="http://d3js.org/d3.v3.min.js"></script>
 
                 <script>
-                start_play = 'steals'
-                data_names = {'steals': "steals.csv",'charges': "data-alt.csv", "FG%": "data.csv"};
-                y_titles = {'steals': "% of Plays Which are Steals",'charges': "# of Charges Drawn", "FG%": "FG%"};
+                start_play = 'FG%'
+                data_names = {'3P%': "ratio_3pt_shots.csv", "FG%": "ratio_shots.csv"};
+                y_titles = {'3P%': "3P%", "FG%": "FG%"};
+                buttons = {'3P%': "3%Button", "FG%": "FG%Button"};
 
                 event_type = []
 
                 // Set the dimensions of the canvas / graph
                 var margin = {top: 30, right: 20, bottom: 60, left: 80},
-                    width = 1100 - margin.left - margin.right,
+                    width = 1200 - margin.left - margin.right,
                     padding = -110,
-                    height = 570 - margin.top - margin.bottom;
+                    height = 500 - margin.top - margin.bottom;
 
                 // Parse the date / time
                 // var parseDate = d3.time.format("%d-%b-%y").parse;
@@ -125,10 +134,10 @@ path {
 
                 // Define the axes
                 var xAxis = d3.svg.axis().scale(x)
-                    .orient("bottom").ticks(5);
+                    .orient("bottom").ticks(20);
 
                 var yAxis = d3.svg.axis().scale(y)
-                    .orient("left").ticks(5);
+                    .orient("left").ticks(10);
 
                 // Define the line
                 var valueline = d3.svg.line()
@@ -136,7 +145,7 @@ path {
                     .y(function(d) { return y(d.close); });
                     
                 // Adds the svg canvas
-                var svg = d3.select("body")
+                var svg = d3.select("section")
                     .append("svg")
                         .attr("width", width + margin.left + margin.right)
                         .attr("height", height + margin.top + margin.bottom)
@@ -187,10 +196,10 @@ path {
 
                         // Scale the range of the data again 
                         x.domain([0, d3.max(data, function(d) { return d.time_elapsed; })]);
-                        y.domain([0, d3.max(data, function(d) { return d.close; })]);
+                        // y.domain([0, d3.max(data, function(d) { return d.close; })]);
 
                     // Select the section we want to apply our changes to
-                    var svg = d3.select("body").transition();
+                    var svg = d3.select("section").transition();
 
                     // Make the changes
                         svg.select(".line")   // change the line
@@ -228,8 +237,23 @@ path {
               
             </div>
         
-    </section>
 
+
+    </section>
+    <div class= "desc">
+        <p>         
+Which prompt or question you are addressing?
+We are investigating the second prompt, which asks us to investigate the role of timeouts in NBA games. We chose to look at how players’ shot efficiency was affected by stoppage of plays (including both timeouts and ends of periods), by looking at their field goal and 3 point percentages changed depending on how long it had been since a stoppage of play occurred.
+Methods used
+We started with the play-by-play data provided by the hackathon organizers, and calculated for each play, how long it had been since the last stoppage of play. This was accomplished using Python’s pandas library, in an iPython notebook.
+A use case of the solution
+This could be used by coaching staff interested in how best to time their usage of timeouts so as not to overly fatigue their players, decreasing their efficiency.
+Further research
+We did not accomplish as much as we had hoped within the time limits because we had originally planned to graph frequencies of hustle plays, but ran into issues because frequencies naturally taper off as time since last stoppage of play increases, and it is not trivial to produce frequencies of the plays’ occurrences. We intend to look further into this issue, and perhaps produce more metrics of efficiency that can help determine how fatigued players become.
+Other interesting aspects of the solution
+The rates we found were largely flat as time since last timeout increased, up to a point. Beyond that point, efficiencies became more volatile (due to smaller samples), but also seemed to trend downward, perhaps meeting our expectations that players became more tired.
+        </p>
+    </div>
     <!-- Footer -->
     <footer class="text-center">
         <div class="footer-below">
