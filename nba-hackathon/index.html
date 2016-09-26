@@ -241,21 +241,21 @@ path {
 
     </section>
     <div class= "desc">
-        <p>         
-
+                
+<p> 
 We are investigating the role of timeouts in NBA games. We chose to look at how players’ shot efficiency was affected by stoppage of plays (including both timeouts and ends of periods), by looking at their field goal and 3 point percentages changed depending on how long it had been since a stoppage of play occurred.
-Methods used
-
 We started with the play-by-play data provided by the hackathon organizers, and calculated for each play, how long it had been since the last stoppage of play. This was accomplished using Python’s pandas library, <a href="notebook.html">in an iPython notebook. </a>
-
+</p>
+<p>
 We did not accomplish as much as we had hoped within the time limits because we had originally planned to graph frequencies of hustle plays, but ran into issues because frequencies naturally taper off as time since last stoppage of play increases, and it is not trivial to calculate per possession statistics from the PBP.  The rates we found were largely flat as time since last timeout increased, up to a point. Beyond that point, efficiencies became more volatile (due to smaller samples), but also seemed to trend downward, perhaps meeting our expectations that players became more tired. 
-
+</p>
+<p>
 It would be interesting going forward to:
 <ul>
     <li>Add many more statistics (ie. FT%, PPP, REB%</li>
     <li>Add ability to filter by team and player. (Real coaching implications)</li>
 </ul>
-        </p>
+</p>
     </div>
     <!-- Footer -->
     <footer class="text-center">
