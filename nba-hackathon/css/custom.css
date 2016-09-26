@@ -53,3 +53,11 @@ input:hover {
 .desc {
     padding: 2.2em;
 }
+
+li {
+    font-size: 14px;
+}
+
+p {
+    font-size: 15px;
+}
